@@ -14,7 +14,8 @@ const AppData = {
                         description: 'Sublimation printed polo shirts',
                         price: '₱350',
                         category: 'apparel',
-                        image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400',
+                        image: '', // Will be set with default image
+                        imageData: null, // Base64 for uploaded images
                         inStock: true
                     },
                     {
@@ -23,7 +24,8 @@ const AppData = {
                         description: 'Full sublimation t-shirts',
                         price: '₱280',
                         category: 'apparel',
-                        image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400',
+                        image: '',
+                        imageData: null,
                         inStock: true
                     },
                     {
@@ -32,7 +34,8 @@ const AppData = {
                         description: 'Professional team jerseys',
                         price: '₱450',
                         category: 'apparel',
-                        image: 'https://images.unsplash.com/photo-1580087256394-dc596e1c8f4f?w=400',
+                        image: '',
+                        imageData: null,
                         inStock: true
                     },
                     {
@@ -41,7 +44,8 @@ const AppData = {
                         description: 'Custom long sleeve designs',
                         price: '₱380',
                         category: 'apparel',
-                        image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400',
+                        image: '',
+                        imageData: null,
                         inStock: true
                     },
                     {
@@ -50,7 +54,8 @@ const AppData = {
                         description: 'High-quality tarpaulin prints',
                         price: '₱25/sqft',
                         category: 'signage',
-                        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400',
+                        image: '',
+                        imageData: null,
                         inStock: true
                     },
                     {
@@ -59,7 +64,8 @@ const AppData = {
                         description: 'Professional store signs',
                         price: 'Custom Quote',
                         category: 'signage',
-                        image: 'https://images.unsplash.com/photo-1524275804141-eb37f78f1e29?w=400',
+                        image: '',
+                        imageData: null,
                         inStock: true
                     },
                     {
@@ -68,7 +74,8 @@ const AppData = {
                         description: 'Vinyl and paper stickers',
                         price: '₱5/pc',
                         category: 'prints',
-                        image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=400',
+                        image: '',
+                        imageData: null,
                         inStock: true
                     },
                     {
@@ -77,7 +84,8 @@ const AppData = {
                         description: 'Bond paper & forms',
                         price: '₱3/page',
                         category: 'prints',
-                        image: 'https://images.unsplash.com/photo-1568702846914-96b305d2uj38?w=400',
+                        image: '',
+                        imageData: null,
                         inStock: true
                     }
                 ],
@@ -136,42 +144,48 @@ const AppData = {
                         id: 1,
                         title: 'Team Jerseys',
                         description: 'Basketball Team Collection',
-                        image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800',
+                        image: '',
+                        imageData: null,
                         size: 'large'
                     },
                     {
                         id: 2,
                         title: 'Custom Polo',
                         description: 'Corporate Event',
-                        image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400',
+                        image: '',
+                        imageData: null,
                         size: 'normal'
                     },
                     {
                         id: 3,
                         title: 'T-Shirt Design',
                         description: 'Band Merchandise',
-                        image: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=400',
+                        image: '',
+                        imageData: null,
                         size: 'normal'
                     },
                     {
                         id: 4,
                         title: 'Fashion Collection',
                         description: 'Custom Streetwear',
-                        image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400',
+                        image: '',
+                        imageData: null,
                         size: 'tall'
                     },
                     {
                         id: 5,
                         title: 'Casual Wear',
                         description: 'Everyday Comfort',
-                        image: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=400',
+                        image: '',
+                        imageData: null,
                         size: 'normal'
                     },
                     {
                         id: 6,
                         title: 'Sports Uniforms',
                         description: 'School P.E. Set',
-                        image: 'https://images.unsplash.com/photo-1571455786673-9d9d6c194f90?w=400',
+                        image: '',
+                        imageData: null,
                         size: 'normal'
                     }
                 ],
@@ -184,8 +198,7 @@ const AppData = {
                     heroTitle: 'PARDS PRINTING SERVICES',
                     heroSubtitle: 'Welcome to',
                     heroDescription: 'Your one-stop solution for premium sublimation printing, professional signage, and expert printer repairs. Quality that speaks for itself.',
-                    videoUrl: 'https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4',
-                    heroImage: 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600'
+                    videoData: null // Base64 for uploaded video
                 },
                 stats: {
                     clients: 500,
@@ -204,8 +217,17 @@ const AppData = {
 
     saveData(data) {
         localStorage.setItem('pardsData', JSON.stringify(data));
-        // Trigger update event
         window.dispatchEvent(new CustomEvent('dataUpdated', { detail: data }));
+    },
+
+    // Helper: Convert file to base64
+    fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
     },
 
     // Product CRUD
@@ -213,18 +235,28 @@ const AppData = {
         return this.getData().products;
     },
 
-    addProduct(product) {
+    async addProduct(product, imageFile = null) {
         const data = this.getData();
         product.id = Date.now();
+        
+        if (imageFile) {
+            product.imageData = await this.fileToBase64(imageFile);
+            product.image = ''; // Clear URL if present
+        }
+        
         data.products.push(product);
         this.saveData(data);
         return product;
     },
 
-    updateProduct(id, updatedProduct) {
+    async updateProduct(id, updatedProduct, imageFile = null) {
         const data = this.getData();
         const index = data.products.findIndex(p => p.id === id);
         if (index !== -1) {
+            if (imageFile) {
+                updatedProduct.imageData = await this.fileToBase64(imageFile);
+                updatedProduct.image = '';
+            }
             data.products[index] = { ...data.products[index], ...updatedProduct };
             this.saveData(data);
             return data.products[index];
@@ -275,18 +307,28 @@ const AppData = {
         return this.getData().gallery;
     },
 
-    addGalleryItem(item) {
+    async addGalleryItem(item, imageFile = null) {
         const data = this.getData();
         item.id = Date.now();
+        
+        if (imageFile) {
+            item.imageData = await this.fileToBase64(imageFile);
+            item.image = '';
+        }
+        
         data.gallery.push(item);
         this.saveData(data);
         return item;
     },
 
-    updateGalleryItem(id, updatedItem) {
+    async updateGalleryItem(id, updatedItem, imageFile = null) {
         const data = this.getData();
         const index = data.gallery.findIndex(g => g.id === id);
         if (index !== -1) {
+            if (imageFile) {
+                updatedItem.imageData = await this.fileToBase64(imageFile);
+                updatedItem.image = '';
+            }
             data.gallery[index] = { ...data.gallery[index], ...updatedItem };
             this.saveData(data);
             return data.gallery[index];
@@ -311,6 +353,13 @@ const AppData = {
         data.settings = { ...data.settings, ...settings };
         this.saveData(data);
         return data.settings;
+    },
+
+    async updateVideo(videoFile) {
+        const data = this.getData();
+        data.settings.videoData = await this.fileToBase64(videoFile);
+        this.saveData(data);
+        return data.settings.videoData;
     },
 
     getStats() {
@@ -340,17 +389,22 @@ const AppData = {
         }
     },
 
-    // Reset to default
     resetData() {
         localStorage.removeItem('pardsData');
         return this.init();
+    },
+
+    // Get image source (prioritizes uploaded image)
+    getImageSrc(item) {
+        if (item.imageData) {
+            return item.imageData;
+        }
+        return item.image || 'https://via.placeholder.com/400';
     }
 };
 
-// Initialize data on load
 AppData.init();
 
-// Export for use in other files
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = AppData;
 }
