@@ -14,8 +14,8 @@ const AppData = {
                         description: 'Sublimation printed polo shirts',
                         price: '₱350',
                         category: 'apparel',
-                        image: '', // Will be set with default image
-                        imageData: null, // Base64 for uploaded images
+                        image: '',
+                        imageData: null,
                         inStock: true
                     },
                     {
@@ -198,7 +198,7 @@ const AppData = {
                     heroTitle: 'PARDS PRINTING SERVICES',
                     heroSubtitle: 'Welcome to',
                     heroDescription: 'Your one-stop solution for premium sublimation printing, professional signage, and expert printer repairs. Quality that speaks for itself.',
-                    videoData: null // Base64 for uploaded video
+                    videoData: null
                 },
                 stats: {
                     clients: 500,
@@ -220,7 +220,6 @@ const AppData = {
         window.dispatchEvent(new CustomEvent('dataUpdated', { detail: data }));
     },
 
-    // Helper: Convert file to base64
     fileToBase64(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -230,7 +229,6 @@ const AppData = {
         });
     },
 
-    // Product CRUD
     getProducts() {
         return this.getData().products;
     },
@@ -238,12 +236,10 @@ const AppData = {
     async addProduct(product, imageFile = null) {
         const data = this.getData();
         product.id = Date.now();
-        
         if (imageFile) {
             product.imageData = await this.fileToBase64(imageFile);
-            product.image = ''; // Clear URL if present
+            product.image = '';
         }
-        
         data.products.push(product);
         this.saveData(data);
         return product;
@@ -271,7 +267,6 @@ const AppData = {
         return true;
     },
 
-    // Service CRUD
     getServices() {
         return this.getData().services;
     },
@@ -302,7 +297,6 @@ const AppData = {
         return true;
     },
 
-    // Gallery CRUD
     getGallery() {
         return this.getData().gallery;
     },
@@ -310,12 +304,10 @@ const AppData = {
     async addGalleryItem(item, imageFile = null) {
         const data = this.getData();
         item.id = Date.now();
-        
         if (imageFile) {
             item.imageData = await this.fileToBase64(imageFile);
             item.image = '';
         }
-        
         data.gallery.push(item);
         this.saveData(data);
         return item;
@@ -343,7 +335,6 @@ const AppData = {
         return true;
     },
 
-    // Settings
     getSettings() {
         return this.getData().settings;
     },
@@ -373,7 +364,6 @@ const AppData = {
         return data.stats;
     },
 
-    // Export/Import
     exportData() {
         return JSON.stringify(this.getData(), null, 2);
     },
@@ -394,7 +384,6 @@ const AppData = {
         return this.init();
     },
 
-    // Get image source (prioritizes uploaded image)
     getImageSrc(item) {
         if (item.imageData) {
             return item.imageData;
