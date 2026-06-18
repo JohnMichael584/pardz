@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const DEMO_USERNAME = 'admin';
     const DEMO_PASSWORD = 'admin123';
 
-    // Current editing item
     let currentEditItem = null;
+    let currentFile = null;
 
     // ==========================================
     // LOGIN FUNCTIONALITY
@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
         renderServices();
         renderGallery();
         loadSettings();
+        loadVideoPreview();
     }
 
     function updateStats() {
@@ -132,10 +133,12 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        grid.innerHTML = products.map(product => `
+        grid.innerHTML = products.map(product => {
+            const imageSrc = AppData.getImageSrc(product);
+            return `
             <div class="product-admin-card" data-id="${product.id}">
                 <div class="product-admin-image">
-                    <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300'">
+                    <img src="${imageSrc}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300'">
                     ${product.inStock ? '<span class="product-badge">In Stock</span>' : '<span class="product-badge out-of-stock">Out of Stock</span>'}
                 </div>
                 <div class="product-admin-info">
@@ -151,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-        `).join('');
+        `}).join('');
     }
 
     // ==========================================
@@ -211,9 +214,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        grid.innerHTML = gallery.map(item => `
+        grid.innerHTML = gallery.map(item => {
+            const imageSrc = AppData.getImageSrc(item);
+            return `
             <div class="gallery-admin-card" data-id="${item.id}">
-                <img src="${item.image}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/400'">
+                <img src="${imageSrc}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/400'">
                 <div class="gallery-admin-overlay">
                     <h4>${item.title}</h4>
                     <p>${item.description}</p>
@@ -223,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-        `).join('');
+        `}).join('');
     }
 
     // ==========================================
@@ -241,16 +246,93 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('heroTitle').value = settings.heroTitle || '';
         document.getElementById('heroSubtitle').value = settings.heroSubtitle || '';
         document.getElementById('heroDescription').value = settings.heroDescription || '';
-        document.getElementById('heroImage').value = settings.heroImage || '';
-        document.getElementById('videoUrl').value = settings.videoUrl || '';
         document.getElementById('statClients').value = stats.clients || 0;
         document.getElementById('statProjects').value = stats.projects || 0;
         document.getElementById('statExperience').value = stats.experience || 0;
 
-        // Update data size
         const dataSize = new Blob([localStorage.getItem('pardsData')]).size;
         document.getElementById('dataSize').textContent = `(${(dataSize / 1024).toFixed(2)} KB)`;
     }
+
+    // ==========================================
+    // VIDEO UPLOAD
+    // ==========================================
+    function loadVideoPreview() {
+        const settings = AppData.getSettings();
+        const previewDiv = document.getElementById('currentVideoPreview');
+        const source = document.getElementById('currentVideoSource');
+        
+        if (settings.videoData) {
+            previewDiv.style.display = 'block';
+            source.src = settings.videoData;
+            source.parentElement.load();
+        } else {
+            previewDiv.style.display = 'none';
+        }
+    }
+
+    const videoUpload = document.getElementById('videoUpload');
+    const videoUploadArea = document.getElementById('videoUploadArea');
+
+    if (videoUpload) {
+        videoUpload.addEventListener('change', async function(e) {
+            const file = this.files[0];
+            if (file) {
+                // Validate file type
+                if (!file.type.startsWith('video/')) {
+                    showToast('Please select a video file!', 'error');
+                    return;
+                }
+                
+                // Validate size (50MB max)
+                if (file.size > 50 * 1024 * 1024) {
+                    showToast('Video must be less than 50MB!', 'error');
+                    return;
+                }
+
+                try {
+                    showToast('Uploading video...');
+                    await AppData.updateVideo(file);
+                    loadVideoPreview();
+                    showToast('Video uploaded successfully!');
+                } catch (error) {
+                    showToast('Error uploading video!', 'error');
+                }
+            }
+        });
+    }
+
+    if (videoUploadArea) {
+        videoUploadArea.addEventListener('click', () => videoUpload.click());
+        
+        videoUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            videoUploadArea.style.borderColor = '#2563eb';
+        });
+        
+        videoUploadArea.addEventListener('dragleave', () => {
+            videoUploadArea.style.borderColor = '#d1d5db';
+        });
+        
+        videoUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            videoUploadArea.style.borderColor = '#d1d5db';
+            if (e.dataTransfer.files.length) {
+                videoUpload.files = e.dataTransfer.files;
+                videoUpload.dispatchEvent(new Event('change'));
+            }
+        });
+    }
+
+    document.getElementById('removeVideoBtn')?.addEventListener('click', function() {
+        if (confirm('Are you sure you want to remove the video?')) {
+            const data = AppData.getData();
+            data.settings.videoData = null;
+            AppData.saveData(data);
+            loadVideoPreview();
+            showToast('Video removed!');
+        }
+    });
 
     // ==========================================
     // SIDEBAR FUNCTIONALITY
@@ -322,9 +404,7 @@ document.addEventListener('DOMContentLoaded', function() {
         AppData.updateSettings({
             heroTitle: document.getElementById('heroTitle').value,
             heroSubtitle: document.getElementById('heroSubtitle').value,
-            heroDescription: document.getElementById('heroDescription').value,
-            heroImage: document.getElementById('heroImage').value,
-            videoUrl: document.getElementById('videoUrl').value
+            heroDescription: document.getElementById('heroDescription').value
         });
         showToast('Hero settings saved!');
     });
@@ -400,6 +480,7 @@ document.addEventListener('DOMContentLoaded', function() {
         itemType.value = type;
         modal.classList.add('active');
         currentEditItem = data;
+        currentFile = null;
         
         if (data && data.id) {
             itemId.value = data.id;
@@ -439,8 +520,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Image URL</label>
-                        <input type="url" id="field_image" value="${data?.image || ''}" required>
+                        <label>Product Image</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="field_image" accept="image/*" ${data ? '' : 'required'}>
+                            <div class="file-upload-area small">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Click to upload image</p>
+                            </div>
+                            ${data?.imageData ? `<div class="file-preview"><img src="${data.imageData}" alt="Current"><span>Current image</span></div>` : ''}
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>
@@ -491,8 +579,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         <input type="text" id="field_description" value="${data?.description || ''}">
                     </div>
                     <div class="form-group">
-                        <label>Image URL</label>
-                        <input type="url" id="field_image" value="${data?.image || ''}" required>
+                        <label>Image</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="field_image" accept="image/*" ${data ? '' : 'required'}>
+                            <div class="file-upload-area small">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Click to upload image</p>
+                            </div>
+                            ${data?.imageData ? `<div class="file-preview"><img src="${data.imageData}" alt="Current"><span>Current image</span></div>` : ''}
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Size</label>
@@ -507,6 +602,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         modalFields.innerHTML = html;
+
+        // Setup file upload handlers
+        const fileInput = document.getElementById('field_image');
+        if (fileInput) {
+            fileInput.addEventListener('change', function(e) {
+                if (this.files[0]) {
+                    currentFile = this.files[0];
+                    // Show preview
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const preview = fileInput.parentElement.querySelector('.file-preview');
+                        if (preview) {
+                            preview.querySelector('img').src = event.target.result;
+                        }
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        }
     }
 
     function getModalData() {
@@ -520,7 +634,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     description: document.getElementById('field_description').value,
                     price: document.getElementById('field_price').value,
                     category: document.getElementById('field_category').value,
-                    image: document.getElementById('field_image').value,
                     inStock: document.getElementById('field_inStock').checked
                 };
                 break;
@@ -540,7 +653,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 data = {
                     title: document.getElementById('field_title').value,
                     description: document.getElementById('field_description').value,
-                    image: document.getElementById('field_image').value,
                     size: document.getElementById('field_size').value
                 };
                 break;
@@ -552,6 +664,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function closeModal() {
         modal.classList.remove('active');
         currentEditItem = null;
+        currentFile = null;
         itemId.value = '';
     }
 
@@ -561,10 +674,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target === modal) closeModal();
     });
 
-    modalSave.addEventListener('click', function() {
+    modalSave.addEventListener('click', async function() {
         const type = itemType.value;
         const data = getModalData();
         const id = itemId.value;
+        const file = document.getElementById('field_image')?.files[0] || currentFile;
 
         // Validate
         if (type === 'product' && !data.name) {
@@ -581,41 +695,46 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         let result;
-        if (id) {
-            // Update
-            switch(type) {
-                case 'product':
-                    result = AppData.updateProduct(parseInt(id), data);
-                    break;
-                case 'service':
-                    result = AppData.updateService(parseInt(id), data);
-                    break;
-                case 'gallery':
-                    result = AppData.updateGalleryItem(parseInt(id), data);
-                    break;
+        try {
+            if (id) {
+                // Update
+                switch(type) {
+                    case 'product':
+                        result = await AppData.updateProduct(parseInt(id), data, file);
+                        break;
+                    case 'service':
+                        result = AppData.updateService(parseInt(id), data);
+                        break;
+                    case 'gallery':
+                        result = await AppData.updateGalleryItem(parseInt(id), data, file);
+                        break;
+                }
+                showToast('Item updated successfully!');
+            } else {
+                // Add
+                switch(type) {
+                    case 'product':
+                        result = await AppData.addProduct(data, file);
+                        break;
+                    case 'service':
+                        result = AppData.addService(data);
+                        break;
+                    case 'gallery':
+                        result = await AppData.addGalleryItem(data, file);
+                        break;
+                }
+                showToast('Item added successfully!');
             }
-            showToast('Item updated successfully!');
-        } else {
-            // Add
-            switch(type) {
-                case 'product':
-                    result = AppData.addProduct(data);
-                    break;
-                case 'service':
-                    result = AppData.addService(data);
-                    break;
-                case 'gallery':
-                    result = AppData.addGalleryItem(data);
-                    break;
-            }
-            showToast('Item added successfully!');
-        }
 
-        if (result) {
-            closeModal();
-            loadDashboard();
-        } else {
+            if (result) {
+                closeModal();
+                loadDashboard();
+            } else {
+                showToast('Error saving item!', 'error');
+            }
+        } catch (error) {
             showToast('Error saving item!', 'error');
+            console.error(error);
         }
     });
 
@@ -795,10 +914,95 @@ document.addEventListener('DOMContentLoaded', function() {
         .shake {
             animation: shake 0.3s ease-in-out;
         }
+        
+        .file-upload-container {
+            position: relative;
+        }
+        
+        .file-upload-container input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            z-index: 2;
+        }
+        
+        .file-upload-area {
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+            cursor: pointer;
+        }
+        
+        .file-upload-area:hover {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+        
+        .file-upload-area.small {
+            padding: 20px;
+        }
+        
+        .file-upload-area i {
+            font-size: 32px;
+            color: #9ca3af;
+            margin-bottom: 10px;
+        }
+        
+        .file-upload-area.small i {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .file-upload-area p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        .file-upload-area.small p {
+            font-size: 13px;
+        }
+        
+        .file-upload-area span {
+            display: block;
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 5px;
+        }
+        
+        .file-preview {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: #f3f4f6;
+            border-radius: 8px;
+        }
+        
+        .file-preview img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .file-preview span {
+            font-size: 13px;
+            color: #6b7280;
+        }
+        
+        .video-upload-section {
+            padding: 20px 0;
+        }
     `;
     document.head.appendChild(style);
 
-    console.log('✅ Pards Printing Admin Dashboard initialized');
-    console.log('📋 Data stored in localStorage');
-    console.log('🔗 Changes will sync with index.html');
+    console.log('✅ Pards Printing Admin Dashboard initialized with file upload support');
+    console.log('📁 Upload images and videos directly from your computer');
+    console.log('🔗 Changes sync with index.html');
 });
