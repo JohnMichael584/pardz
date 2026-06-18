@@ -25,46 +25,49 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     
     function loadData() {
-        const data = AppData.getData();
-        const settings = data.settings;
-        const stats = data.stats;
+        try {
+            const data = AppData.getData();
+            const settings = data.settings;
+            const stats = data.stats;
 
-        // Update Hero
-        document.getElementById('heroSubtitle').textContent = settings.heroSubtitle || 'Welcome to';
-        document.getElementById('heroTitle').innerHTML = (settings.heroTitle || 'PARDS PRINTING SERVICES').replace('PARDS PRINTING SERVICES', 'PARDS <span class="highlight">PRINTING</span> SERVICES');
-        document.getElementById('heroDescription').textContent = settings.heroDescription || 'Your one-stop solution for premium sublimation printing, professional signage, and expert printer repairs. Quality that speaks for itself.';
-        document.getElementById('heroImage').src = settings.heroImage || 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600';
+            // Update Hero
+            document.getElementById('heroSubtitle').textContent = settings.heroSubtitle || 'Welcome to';
+            document.getElementById('heroTitle').innerHTML = (settings.heroTitle || 'PARDS PRINTING SERVICES').replace('PARDS PRINTING SERVICES', 'PARDS <span class="highlight">PRINTING</span> SERVICES');
+            document.getElementById('heroDescription').textContent = settings.heroDescription || 'Your one-stop solution for premium sublimation printing, professional signage, and expert printer repairs. Quality that speaks for itself.';
 
-        // Update Video
-        const videoSource = promoVideo.querySelector('source');
-        if (videoSource) {
-            videoSource.src = settings.videoUrl || 'https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4';
-            promoVideo.load();
+            // Update Stats
+            document.getElementById('statClients').textContent = stats.clients || 0;
+            document.getElementById('statClients').setAttribute('data-count', stats.clients || 0);
+            document.getElementById('statProjects').textContent = stats.projects || 0;
+            document.getElementById('statProjects').setAttribute('data-count', stats.projects || 0);
+            document.getElementById('statExperience').textContent = stats.experience || 0;
+            document.getElementById('statExperience').setAttribute('data-count', stats.experience || 0);
+            document.getElementById('aboutYears').textContent = (stats.experience || 0) + '+';
+
+            // Update Contact Info
+            document.getElementById('contactAddress').textContent = settings.address || '123 Print Street, Business District City, Province 1234';
+            document.getElementById('contactPhone').textContent = settings.phone || '+63 912 345 6789';
+            document.getElementById('contactEmail').textContent = settings.email || 'info@pardsprint.com';
+            document.getElementById('contactHours').textContent = settings.hours || 'Mon - Sat: 8:00 AM - 6:00 PM';
+
+            // Update Video
+            const videoSource = document.getElementById('videoSource');
+            if (videoSource && settings.videoData) {
+                videoSource.src = settings.videoData;
+                promoVideo.load();
+            }
+
+            // Render Services
+            renderServices(data.services);
+            
+            // Render Products
+            renderProducts(data.products);
+            
+            // Render Gallery
+            renderGallery(data.gallery);
+        } catch (error) {
+            console.error('Error loading data:', error);
         }
-
-        // Update Stats
-        document.getElementById('statClients').textContent = stats.clients || 0;
-        document.getElementById('statClients').setAttribute('data-count', stats.clients || 0);
-        document.getElementById('statProjects').textContent = stats.projects || 0;
-        document.getElementById('statProjects').setAttribute('data-count', stats.projects || 0);
-        document.getElementById('statExperience').textContent = stats.experience || 0;
-        document.getElementById('statExperience').setAttribute('data-count', stats.experience || 0);
-        document.getElementById('aboutYears').textContent = (stats.experience || 0) + '+';
-
-        // Update Contact Info
-        document.getElementById('contactAddress').textContent = settings.address || '123 Print Street, Business District City, Province 1234';
-        document.getElementById('contactPhone').textContent = settings.phone || '+63 912 345 6789';
-        document.getElementById('contactEmail').textContent = settings.email || 'info@pardsprint.com';
-        document.getElementById('contactHours').textContent = settings.hours || 'Mon - Sat: 8:00 AM - 6:00 PM';
-
-        // Render Services
-        renderServices(data.services);
-        
-        // Render Products
-        renderProducts(data.products);
-        
-        // Render Gallery
-        renderGallery(data.gallery);
     }
 
     // ==========================================
@@ -91,16 +94,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ==========================================
-    // RENDER PRODUCTS
+    // RENDER PRODUCTS - FIXED IMAGE LOADING
     // ==========================================
     function renderProducts(products) {
         const grid = document.getElementById('productsGrid');
         if (!grid) return;
 
-        grid.innerHTML = products.map(product => `
+        if (products.length === 0) {
+            grid.innerHTML = `
+                <div class="empty-state" style="grid-column:1/-1;text-align:center;padding:60px 20px;background:#f9fafb;border-radius:12px;border:2px dashed #d1d5db;">
+                    <i class="fas fa-box-open" style="font-size:48px;color:#9ca3af;margin-bottom:15px;"></i>
+                    <h3 style="font-size:20px;color:#374151;margin-bottom:8px;">No Products Available</h3>
+                    <p style="color:#6b7280;">Check back later for new products.</p>
+                </div>
+            `;
+            return;
+        }
+
+        grid.innerHTML = products.map(product => {
+            // Get the image source using AppData.getImageSrc()
+            const imageSrc = AppData.getImageSrc(product);
+            
+            return `
             <div class="product-card" data-category="${product.category}">
                 <div class="product-image">
-                    <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/400'">
+                    <img src="${imageSrc}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/400/2563eb/FFFFFF?text=${encodeURIComponent(product.name)}'">
                     <div class="product-overlay">
                         <button class="btn-view"><i class="fas fa-eye"></i></button>
                         <button class="btn-quote"><i class="fas fa-comment-dots"></i></button>
@@ -112,25 +130,40 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span class="product-price">${product.price}</span>
                 </div>
             </div>
-        `).join('');
+        `}).join('');
     }
 
     // ==========================================
-    // RENDER GALLERY
+    // RENDER GALLERY - FIXED IMAGE LOADING
     // ==========================================
     function renderGallery(gallery) {
         const grid = document.getElementById('galleryGrid');
         if (!grid) return;
 
-        grid.innerHTML = gallery.map(item => `
+        if (gallery.length === 0) {
+            grid.innerHTML = `
+                <div class="empty-state" style="grid-column:1/-1;text-align:center;padding:60px 20px;background:#f9fafb;border-radius:12px;border:2px dashed #d1d5db;">
+                    <i class="fas fa-images" style="font-size:48px;color:#9ca3af;margin-bottom:15px;"></i>
+                    <h3 style="font-size:20px;color:#374151;margin-bottom:8px;">No Gallery Items</h3>
+                    <p style="color:#6b7280;">Check back later for our latest work.</p>
+                </div>
+            `;
+            return;
+        }
+
+        grid.innerHTML = gallery.map(item => {
+            // Get the image source using AppData.getImageSrc()
+            const imageSrc = AppData.getImageSrc(item);
+            
+            return `
             <div class="gallery-item ${item.size || 'normal'}">
-                <img src="${item.image}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/400'">
+                <img src="${imageSrc}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/400/2563eb/FFFFFF?text=${encodeURIComponent(item.title)}'">
                 <div class="gallery-overlay">
                     <h4>${item.title}</h4>
                     <p>${item.description}</p>
                 </div>
             </div>
-        `).join('');
+        `}).join('');
     }
 
     // ==========================================
@@ -297,8 +330,6 @@ document.addEventListener('DOMContentLoaded', function() {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const formData = new FormData(this);
-        
         const submitBtn = this.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
@@ -309,7 +340,6 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.disabled = false;
             this.reset();
             showToast('Message sent successfully! We\'ll get back to you soon.');
-            console.log('Form submitted:', Object.fromEntries(formData));
         }, 2000);
     });
 
