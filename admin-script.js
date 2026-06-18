@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const itemId = document.getElementById('itemId');
     const itemType = document.getElementById('itemType');
 
-    // Demo credentials
     const DEMO_USERNAME = 'admin';
     const DEMO_PASSWORD = 'admin123';
 
@@ -36,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentFile = null;
 
     // ==========================================
-    // LOGIN FUNCTIONALITY
+    // LOGIN
     // ==========================================
     
     if (localStorage.getItem('isLoggedIn') === 'true') {
@@ -97,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ==========================================
-    // LOAD DASHBOARD DATA
+    // LOAD DASHBOARD
     // ==========================================
     function loadDashboard() {
         updateStats();
@@ -278,13 +277,10 @@ document.addEventListener('DOMContentLoaded', function() {
         videoUpload.addEventListener('change', async function(e) {
             const file = this.files[0];
             if (file) {
-                // Validate file type
                 if (!file.type.startsWith('video/')) {
                     showToast('Please select a video file!', 'error');
                     return;
                 }
-                
-                // Validate size (50MB max)
                 if (file.size > 50 * 1024 * 1024) {
                     showToast('Video must be less than 50MB!', 'error');
                     return;
@@ -304,16 +300,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (videoUploadArea) {
         videoUploadArea.addEventListener('click', () => videoUpload.click());
-        
         videoUploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
             videoUploadArea.style.borderColor = '#2563eb';
         });
-        
         videoUploadArea.addEventListener('dragleave', () => {
             videoUploadArea.style.borderColor = '#d1d5db';
         });
-        
         videoUploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
             videoUploadArea.style.borderColor = '#d1d5db';
@@ -335,7 +328,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ==========================================
-    // SIDEBAR FUNCTIONALITY
+    // SIDEBAR
     // ==========================================
     
     sidebarToggle.addEventListener('click', function() {
@@ -349,7 +342,6 @@ document.addEventListener('DOMContentLoaded', function() {
     navItems.forEach(item => {
         item.addEventListener('click', function(e) {
             e.preventDefault();
-            
             navItems.forEach(nav => nav.classList.remove('active'));
             this.classList.add('active');
 
@@ -359,7 +351,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (targetPage) {
                 targetPage.classList.add('active');
             }
-
             sidebar.classList.remove('active');
         });
     });
@@ -371,10 +362,8 @@ document.addEventListener('DOMContentLoaded', function() {
     settingsTabs.forEach(tab => {
         tab.addEventListener('click', function() {
             const tabId = this.getAttribute('data-tab');
-            
             settingsTabs.forEach(t => t.classList.remove('active'));
             this.classList.add('active');
-
             settingsPanels.forEach(panel => panel.classList.remove('active'));
             const targetPanel = document.getElementById(tabId + 'Panel');
             if (targetPanel) {
@@ -384,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ==========================================
-    // SETTINGS FORM HANDLERS
+    // SETTINGS FORMS
     // ==========================================
     
     document.getElementById('generalSettingsForm').addEventListener('submit', function(e) {
@@ -472,7 +461,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ==========================================
-    // MODAL HANDLERS
+    // MODAL
     // ==========================================
     
     function openModal(title, type, data = null) {
@@ -522,7 +511,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="form-group">
                         <label>Product Image</label>
                         <div class="file-upload-container">
-                            <input type="file" id="field_image" accept="image/*" ${data ? '' : 'required'}>
+                            <input type="file" id="field_image" accept="image/*">
                             <div class="file-upload-area small">
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <p>Click to upload image</p>
@@ -581,7 +570,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="form-group">
                         <label>Image</label>
                         <div class="file-upload-container">
-                            <input type="file" id="field_image" accept="image/*" ${data ? '' : 'required'}>
+                            <input type="file" id="field_image" accept="image/*">
                             <div class="file-upload-area small">
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <p>Click to upload image</p>
@@ -603,13 +592,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         modalFields.innerHTML = html;
 
-        // Setup file upload handlers
         const fileInput = document.getElementById('field_image');
         if (fileInput) {
             fileInput.addEventListener('change', function(e) {
                 if (this.files[0]) {
                     currentFile = this.files[0];
-                    // Show preview
                     const reader = new FileReader();
                     reader.onload = function(event) {
                         const preview = fileInput.parentElement.querySelector('.file-preview');
@@ -680,7 +667,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const id = itemId.value;
         const file = document.getElementById('field_image')?.files[0] || currentFile;
 
-        // Validate
         if (type === 'product' && !data.name) {
             showToast('Product name is required!', 'error');
             return;
@@ -697,7 +683,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let result;
         try {
             if (id) {
-                // Update
                 switch(type) {
                     case 'product':
                         result = await AppData.updateProduct(parseInt(id), data, file);
@@ -711,7 +696,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 showToast('Item updated successfully!');
             } else {
-                // Add
                 switch(type) {
                     case 'product':
                         result = await AppData.addProduct(data, file);
@@ -755,7 +739,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ==========================================
-    // CRUD FUNCTIONS (Global for inline buttons)
+    // CRUD FUNCTIONS
     // ==========================================
     
     window.editProduct = function(id) {
@@ -804,7 +788,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // ==========================================
-    // TOAST NOTIFICATION
+    // TOAST
     // ==========================================
     
     function showToast(message, type = 'success') {
@@ -835,7 +819,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ==========================================
-    // NOTIFICATION DROPDOWN
+    // DROPDOWNS
     // ==========================================
     
     const notificationBtn = document.querySelector('.notification-btn');
@@ -866,10 +850,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ==========================================
-    // USER MENU DROPDOWN
-    // ==========================================
-    
     const userBtn = document.querySelector('.user-btn');
     const userDropdown = document.querySelector('.user-dropdown');
     
@@ -901,7 +881,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ==========================================
-    // ADD SHAKE ANIMATION
+    // STYLES
     // ==========================================
     
     const style = document.createElement('style');
