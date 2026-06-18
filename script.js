@@ -17,9 +17,128 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contactForm');
     const toast = document.getElementById('toast');
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const productCards = document.querySelectorAll('.product-card');
     const testimonialTrack = document.getElementById('testimonialTrack');
     const testimonialDots = document.getElementById('testimonialDots');
+
+    // ==========================================
+    // LOAD DATA FROM LOCAL STORAGE
+    // ==========================================
+    
+    function loadData() {
+        const data = AppData.getData();
+        const settings = data.settings;
+        const stats = data.stats;
+
+        // Update Hero
+        document.getElementById('heroSubtitle').textContent = settings.heroSubtitle || 'Welcome to';
+        document.getElementById('heroTitle').innerHTML = (settings.heroTitle || 'PARDS PRINTING SERVICES').replace('PARDS PRINTING SERVICES', 'PARDS <span class="highlight">PRINTING</span> SERVICES');
+        document.getElementById('heroDescription').textContent = settings.heroDescription || 'Your one-stop solution for premium sublimation printing, professional signage, and expert printer repairs. Quality that speaks for itself.';
+        document.getElementById('heroImage').src = settings.heroImage || 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600';
+
+        // Update Video
+        const videoSource = promoVideo.querySelector('source');
+        if (videoSource) {
+            videoSource.src = settings.videoUrl || 'https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4';
+            promoVideo.load();
+        }
+
+        // Update Stats
+        document.getElementById('statClients').textContent = stats.clients || 0;
+        document.getElementById('statClients').setAttribute('data-count', stats.clients || 0);
+        document.getElementById('statProjects').textContent = stats.projects || 0;
+        document.getElementById('statProjects').setAttribute('data-count', stats.projects || 0);
+        document.getElementById('statExperience').textContent = stats.experience || 0;
+        document.getElementById('statExperience').setAttribute('data-count', stats.experience || 0);
+        document.getElementById('aboutYears').textContent = (stats.experience || 0) + '+';
+
+        // Update Contact Info
+        document.getElementById('contactAddress').textContent = settings.address || '123 Print Street, Business District City, Province 1234';
+        document.getElementById('contactPhone').textContent = settings.phone || '+63 912 345 6789';
+        document.getElementById('contactEmail').textContent = settings.email || 'info@pardsprint.com';
+        document.getElementById('contactHours').textContent = settings.hours || 'Mon - Sat: 8:00 AM - 6:00 PM';
+
+        // Render Services
+        renderServices(data.services);
+        
+        // Render Products
+        renderProducts(data.products);
+        
+        // Render Gallery
+        renderGallery(data.gallery);
+    }
+
+    // ==========================================
+    // RENDER SERVICES
+    // ==========================================
+    function renderServices(services) {
+        const grid = document.getElementById('servicesGrid');
+        if (!grid) return;
+
+        grid.innerHTML = services.map(service => `
+            <div class="service-card ${service.featured ? 'featured' : ''}" data-aos="fade-up">
+                ${service.featured ? '<div class="featured-badge">Popular</div>' : ''}
+                <div class="service-icon">
+                    <i class="fas ${service.icon}"></i>
+                </div>
+                <h3>${service.title}</h3>
+                <p>${service.description}</p>
+                <ul class="service-features">
+                    ${service.features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('')}
+                </ul>
+                <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        `).join('');
+    }
+
+    // ==========================================
+    // RENDER PRODUCTS
+    // ==========================================
+    function renderProducts(products) {
+        const grid = document.getElementById('productsGrid');
+        if (!grid) return;
+
+        grid.innerHTML = products.map(product => `
+            <div class="product-card" data-category="${product.category}">
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/400'">
+                    <div class="product-overlay">
+                        <button class="btn-view"><i class="fas fa-eye"></i></button>
+                        <button class="btn-quote"><i class="fas fa-comment-dots"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h4>${product.name}</h4>
+                    <p>${product.description}</p>
+                    <span class="product-price">${product.price}</span>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // ==========================================
+    // RENDER GALLERY
+    // ==========================================
+    function renderGallery(gallery) {
+        const grid = document.getElementById('galleryGrid');
+        if (!grid) return;
+
+        grid.innerHTML = gallery.map(item => `
+            <div class="gallery-item ${item.size || 'normal'}">
+                <img src="${item.image}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/400'">
+                <div class="gallery-overlay">
+                    <h4>${item.title}</h4>
+                    <p>${item.description}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // ==========================================
+    // LISTEN FOR DATA UPDATES
+    // ==========================================
+    window.addEventListener('dataUpdated', function(e) {
+        loadData();
+    });
 
     // ==========================================
     // PRELOADER
@@ -28,13 +147,13 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             preloader.classList.add('hidden');
         }, 1500);
+        loadData();
     });
 
     // ==========================================
     // NAVIGATION
     // ==========================================
     
-    // Scroll effect
     window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
@@ -42,24 +161,20 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.classList.remove('scrolled');
         }
 
-        // Back to top visibility
         if (window.scrollY > 500) {
             backToTop.classList.add('visible');
         } else {
             backToTop.classList.remove('visible');
         }
 
-        // Active nav link on scroll
         updateActiveNavLink();
     });
 
-    // Mobile menu toggle
     navToggle.addEventListener('click', function() {
         navToggle.classList.toggle('active');
         navMenu.classList.toggle('active');
     });
 
-    // Close mobile menu on link click
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
             navToggle.classList.remove('active');
@@ -67,7 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Update active nav link based on scroll position
     function updateActiveNavLink() {
         const sections = document.querySelectorAll('section[id]');
         const scrollPos = window.scrollY + 100;
@@ -125,11 +239,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-            // Update active button
             filterBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
 
             const filter = this.getAttribute('data-filter');
+            const productCards = document.querySelectorAll('.product-card');
 
             productCards.forEach(card => {
                 const category = card.getAttribute('data-category');
@@ -151,7 +265,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentSlide = 0;
     const totalSlides = testimonialCards.length;
 
-    // Create dots
     for (let i = 0; i < totalSlides; i++) {
         const dot = document.createElement('div');
         dot.classList.add('dot');
@@ -176,7 +289,6 @@ document.addEventListener('DOMContentLoaded', function() {
         goToSlide(currentSlide);
     }
 
-    // Auto-play testimonials
     setInterval(nextSlide, 5000);
 
     // ==========================================
@@ -185,28 +297,18 @@ document.addEventListener('DOMContentLoaded', function() {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Simulate form submission
         const formData = new FormData(this);
         
-        // Show loading state
         const submitBtn = this.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         submitBtn.disabled = true;
 
-        // Simulate API call
         setTimeout(() => {
-            // Reset button
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
-
-            // Reset form
             this.reset();
-
-            // Show success toast
             showToast('Message sent successfully! We\'ll get back to you soon.');
-
-            // In a real application, you would send the data to a server here
             console.log('Form submitted:', Object.fromEntries(formData));
         }, 2000);
     });
@@ -251,7 +353,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Start counters when hero section is visible
     const heroObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting && !countersStarted) {
@@ -286,7 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ==========================================
-    // SMOOTH SCROLL FOR ANCHOR LINKS
+    // SMOOTH SCROLL
     // ==========================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -316,4 +417,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    console.log('✅ Pards Printing website loaded with dynamic data');
+    console.log('🔗 Changes in admin panel will auto-sync here');
 });
