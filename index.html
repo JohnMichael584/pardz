@@ -3,488 +3,497 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Pards Printing Services</title>
-    <link rel="stylesheet" href="admin-styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Pards Printing Services | Professional Sublimation & Printing</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Login Screen -->
-    <div class="login-screen" id="loginScreen">
-        <div class="login-container">
-            <div class="login-header">
-                <div class="login-logo">
-                    <i class="fas fa-print"></i>
-                </div>
-                <h1>Admin Login</h1>
-                <p>Pards Printing Services Dashboard</p>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="loader">
+            <div class="loader-icon">
+                <i class="fas fa-print"></i>
             </div>
-            <form class="login-form" id="loginForm">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-user"></i>
-                        <input type="text" id="username" placeholder="Enter username" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="password" placeholder="Enter password" required>
-                        <button type="button" class="toggle-password" id="togglePassword">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="form-options">
-                    <label class="remember-me">
-                        <input type="checkbox" id="rememberMe">
-                        <span>Remember me</span>
-                    </label>
-                    <a href="#" class="forgot-password">Forgot password?</a>
-                </div>
-                <button type="submit" class="btn-login">
-                    <span>Sign In</span>
-                    <i class="fas fa-arrow-right"></i>
-                </button>
-                <p class="login-hint">Demo: admin / admin123</p>
-            </form>
+            <p>PARDS PRINTING</p>
         </div>
     </div>
 
-    <!-- Main Dashboard -->
-    <div class="dashboard" id="dashboard" style="display: none;">
-        <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <i class="fas fa-print"></i>
-                    <span>PARDS</span>
-                </div>
-                <button class="sidebar-toggle" id="sidebarToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-print"></i>
+                <span>PARDS</span> Printing
+            </a>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <nav class="sidebar-nav">
-                <ul>
-                    <li class="nav-item active" data-page="dashboard">
-                        <a href="#">
-                            <i class="fas fa-th-large"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" data-page="orders">
-                        <a href="#">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span>Orders</span>
-                            <span class="badge">12</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" data-page="products">
-                        <a href="#">
-                            <i class="fas fa-box"></i>
-                            <span>Products</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" data-page="services">
-                        <a href="#">
-                            <i class="fas fa-cogs"></i>
-                            <span>Services</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" data-page="gallery">
-                        <a href="#">
-                            <i class="fas fa-images"></i>
-                            <span>Gallery</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" data-page="settings">
-                        <a href="#">
-                            <i class="fas fa-sliders-h"></i>
-                            <span>Settings</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="sidebar-footer">
-                <a href="index.html" class="view-site" target="_blank">
-                    <i class="fas fa-external-link-alt"></i>
-                    <span>View Website</span>
-                </a>
-            </div>
-        </aside>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#products" class="nav-link">Products</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="admin.html" class="nav-link admin-link"><i class="fas fa-lock"></i> Admin</a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Top Bar -->
-            <header class="topbar">
-                <div class="topbar-left">
-                    <button class="mobile-toggle" id="mobileToggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Search...">
-                    </div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-shape shape-1"></div>
+            <div class="hero-shape shape-2"></div>
+            <div class="hero-shape shape-3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-subtitle animate-fade-in" id="heroSubtitle">Welcome to</span>
+                <h1 class="hero-title animate-slide-up" id="heroTitle">
+                    PARDS <span class="highlight">PRINTING</span> SERVICES
+                </h1>
+                <p class="hero-description animate-slide-up-delay" id="heroDescription">
+                    Your one-stop solution for premium sublimation printing, professional signage, 
+                    and expert printer repairs. Quality that speaks for itself.
+                </p>
+                <div class="hero-buttons animate-fade-in-delay">
+                    <a href="#services" class="btn btn-primary">
+                        <span>Our Services</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span>Get Quote</span>
+                        <i class="fas fa-comment-dots"></i>
+                    </a>
                 </div>
-                <div class="topbar-right">
-                    <div class="notifications">
-                        <button class="notification-btn">
-                            <i class="fas fa-bell"></i>
-                            <span class="notification-badge">3</span>
-                        </button>
-                        <div class="notification-dropdown">
-                            <div class="dropdown-header">
-                                <h4>Notifications</h4>
-                                <a href="#">Mark all as read</a>
-                            </div>
-                            <div class="notification-list">
-                                <div class="notification-item unread">
-                                    <div class="notification-icon order">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </div>
-                                    <div class="notification-content">
-                                        <p>New order #1234 received</p>
-                                        <span>2 minutes ago</span>
-                                    </div>
-                                </div>
-                                <div class="notification-item unread">
-                                    <div class="notification-icon message">
-                                        <i class="fas fa-envelope"></i>
-                                    </div>
-                                    <div class="notification-content">
-                                        <p>New message from Juan Dela Cruz</p>
-                                        <span>15 minutes ago</span>
-                                    </div>
-                                </div>
-                                <div class="notification-item">
-                                    <div class="notification-icon repair">
-                                        <i class="fas fa-tools"></i>
-                                    </div>
-                                    <div class="notification-content">
-                                        <p>Repair job completed</p>
-                                        <span>1 hour ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dropdown-footer">
-                                <a href="#">View all notifications</a>
-                            </div>
-                        </div>
+                <div class="hero-stats animate-fade-in-delay-2">
+                    <div class="stat-item">
+                        <span class="stat-number" id="statClients" data-count="500">0</span>+
+                        <span class="stat-label">Happy Clients</span>
                     </div>
-                    <div class="user-menu">
-                        <button class="user-btn">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100" alt="Admin">
-                            <span>Admin</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="user-dropdown">
-                            <a href="#"><i class="fas fa-user"></i> Profile</a>
-                            <a href="#"><i class="fas fa-cog"></i> Settings</a>
-                            <hr>
-                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                        </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="statProjects" data-count="1000">0</span>+
+                        <span class="stat-label">Projects Done</span>
                     </div>
-                </div>
-            </header>
-
-            <!-- Dashboard Content -->
-            <div class="content-wrapper">
-                <!-- Dashboard Page -->
-                <div class="page active" id="dashboardPage">
-                    <div class="page-header">
-                        <h1>Dashboard</h1>
-                        <p>Welcome back, Admin! Here's what's happening today.</p>
-                    </div>
-
-                    <!-- Stats Cards -->
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-icon products">
-                                <i class="fas fa-box"></i>
-                            </div>
-                            <div class="stat-info">
-                                <h3 id="totalProducts">0</h3>
-                                <p>Total Products</p>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon services">
-                                <i class="fas fa-cogs"></i>
-                            </div>
-                            <div class="stat-info">
-                                <h3 id="totalServices">0</h3>
-                                <p>Total Services</p>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon gallery">
-                                <i class="fas fa-images"></i>
-                            </div>
-                            <div class="stat-info">
-                                <h3 id="totalGallery">0</h3>
-                                <p>Gallery Items</p>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon orders">
-                                <i class="fas fa-shopping-cart"></i>
-                            </div>
-                            <div class="stat-info">
-                                <h3>156</h3>
-                                <p>Total Orders</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Quick Actions -->
-                    <div class="quick-actions">
-                        <div class="section-header">
-                            <h3>Quick Actions</h3>
-                        </div>
-                        <div class="action-grid">
-                            <button class="action-card" id="addProductBtn">
-                                <i class="fas fa-plus-circle"></i>
-                                <span>Add Product</span>
-                            </button>
-                            <button class="action-card" id="addServiceBtn">
-                                <i class="fas fa-plus-circle"></i>
-                                <span>Add Service</span>
-                            </button>
-                            <button class="action-card" id="addGalleryBtn">
-                                <i class="fas fa-plus-circle"></i>
-                                <span>Add Gallery Item</span>
-                            </button>
-                            <button class="action-card" onclick="window.location.href='index.html'">
-                                <i class="fas fa-external-link-alt"></i>
-                                <span>View Website</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Products Page -->
-                <div class="page" id="productsPage">
-                    <div class="page-header">
-                        <div>
-                            <h1>Products</h1>
-                            <p>Manage your product catalog</p>
-                        </div>
-                        <button class="btn-primary" id="addProductBtn2">
-                            <i class="fas fa-plus"></i>
-                            <span>Add Product</span>
-                        </button>
-                    </div>
-
-                    <div class="products-admin-grid" id="productsGrid">
-                        <!-- Products will be rendered here -->
-                    </div>
-                </div>
-
-                <!-- Services Page -->
-                <div class="page" id="servicesPage">
-                    <div class="page-header">
-                        <div>
-                            <h1>Services</h1>
-                            <p>Manage your services</p>
-                        </div>
-                        <button class="btn-primary" id="addServiceBtn2">
-                            <i class="fas fa-plus"></i>
-                            <span>Add Service</span>
-                        </button>
-                    </div>
-
-                    <div class="services-admin-grid" id="servicesGrid">
-                        <!-- Services will be rendered here -->
-                    </div>
-                </div>
-
-                <!-- Gallery Page -->
-                <div class="page" id="galleryPage">
-                    <div class="page-header">
-                        <div>
-                            <h1>Gallery</h1>
-                            <p>Manage your gallery images</p>
-                        </div>
-                        <button class="btn-primary" id="addGalleryBtn2">
-                            <i class="fas fa-plus"></i>
-                            <span>Add Image</span>
-                        </button>
-                    </div>
-
-                    <div class="gallery-admin-grid" id="galleryGrid">
-                        <!-- Gallery items will be rendered here -->
-                    </div>
-                </div>
-
-                <!-- Settings Page -->
-                <div class="page" id="settingsPage">
-                    <div class="page-header">
-                        <div>
-                            <h1>Settings</h1>
-                            <p>Manage your website settings</p>
-                        </div>
-                    </div>
-
-                    <div class="settings-container">
-                        <div class="settings-tabs">
-                            <button class="settings-tab active" data-tab="general">
-                                <i class="fas fa-cog"></i>
-                                <span>General</span>
-                            </button>
-                            <button class="settings-tab" data-tab="hero">
-                                <i class="fas fa-home"></i>
-                                <span>Hero Section</span>
-                            </button>
-                            <button class="settings-tab" data-tab="stats">
-                                <i class="fas fa-chart-bar"></i>
-                                <span>Statistics</span>
-                            </button>
-                            <button class="settings-tab" data-tab="data">
-                                <i class="fas fa-database"></i>
-                                <span>Data Management</span>
-                            </button>
-                        </div>
-                        <div class="settings-content">
-                            <!-- General Settings -->
-                            <div class="settings-panel active" id="generalPanel">
-                                <h3>General Settings</h3>
-                                <form class="settings-form" id="generalSettingsForm">
-                                    <div class="form-group">
-                                        <label>Business Name</label>
-                                        <input type="text" id="businessName" value="Pards Printing Services">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Address</label>
-                                        <textarea id="businessAddress" rows="2">123 Print Street, Business District City, Province 1234</textarea>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label>Phone</label>
-                                            <input type="text" id="businessPhone" value="+63 912 345 6789">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Email</label>
-                                            <input type="email" id="businessEmail" value="info@pardsprint.com">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Business Hours</label>
-                                        <input type="text" id="businessHours" value="Mon - Sat: 8:00 AM - 6:00 PM">
-                                    </div>
-                                    <button type="submit" class="btn-primary">Save Settings</button>
-                                </form>
-                            </div>
-
-                            <!-- Hero Settings -->
-                            <div class="settings-panel" id="heroPanel">
-                                <h3>Hero Section Settings</h3>
-                                <form class="settings-form" id="heroSettingsForm">
-                                    <div class="form-group">
-                                        <label>Hero Title</label>
-                                        <input type="text" id="heroTitle" value="PARDS PRINTING SERVICES">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Hero Subtitle</label>
-                                        <input type="text" id="heroSubtitle" value="Welcome to">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Hero Description</label>
-                                        <textarea id="heroDescription" rows="3">Your one-stop solution for premium sublimation printing, professional signage, and expert printer repairs. Quality that speaks for itself.</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Hero Image URL</label>
-                                        <input type="url" id="heroImage" value="https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Video URL</label>
-                                        <input type="url" id="videoUrl" value="https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4">
-                                    </div>
-                                    <button type="submit" class="btn-primary">Save Hero Settings</button>
-                                </form>
-                            </div>
-
-                            <!-- Statistics -->
-                            <div class="settings-panel" id="statsPanel">
-                                <h3>Statistics</h3>
-                                <form class="settings-form" id="statsSettingsForm">
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label>Happy Clients</label>
-                                            <input type="number" id="statClients" value="500">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Projects Done</label>
-                                            <input type="number" id="statProjects" value="1000">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Years Experience</label>
-                                        <input type="number" id="statExperience" value="10">
-                                    </div>
-                                    <button type="submit" class="btn-primary">Save Statistics</button>
-                                </form>
-                            </div>
-
-                            <!-- Data Management -->
-                            <div class="settings-panel" id="dataPanel">
-                                <h3>Data Management</h3>
-                                <div class="data-management">
-                                    <div class="data-actions">
-                                        <button class="btn-secondary" id="exportDataBtn">
-                                            <i class="fas fa-download"></i> Export Data
-                                        </button>
-                                        <button class="btn-secondary" id="importDataBtn">
-                                            <i class="fas fa-upload"></i> Import Data
-                                        </button>
-                                        <button class="btn-danger" id="resetDataBtn">
-                                            <i class="fas fa-trash"></i> Reset to Default
-                                        </button>
-                                    </div>
-                                    <div class="data-status">
-                                        <p>Data is stored locally in your browser. <span id="dataSize"></span></p>
-                                    </div>
-                                    <input type="file" id="importFile" accept=".json" style="display:none">
-                                </div>
-                            </div>
-                        </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="statExperience" data-count="10">0</span>+
+                        <span class="stat-label">Years Experience</span>
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
-
-    <!-- Modal for Add/Edit -->
-    <div class="modal" id="itemModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">Add Item</h3>
-                <button class="close-btn" id="modalClose">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="itemForm">
-                    <input type="hidden" id="itemId">
-                    <input type="hidden" id="itemType">
-                    <div id="modalFields">
-                        <!-- Dynamic fields will be rendered here -->
+            <div class="hero-visual animate-float">
+                <div class="hero-image-container">
+                    <img src="https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600" alt="Printing Services" class="hero-image" id="heroImage">
+                    <div class="floating-card card-1">
+                        <i class="fas fa-tshirt"></i>
+                        <span>Custom Apparel</span>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn-secondary" id="modalCancel">Cancel</button>
-                <button class="btn-primary" id="modalSave">Save</button>
+                    <div class="floating-card card-2">
+                        <i class="fas fa-palette"></i>
+                        <span>Vibrant Colors</span>
+                    </div>
+                    <div class="floating-card card-3">
+                        <i class="fas fa-award"></i>
+                        <span>Premium Quality</span>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>Scroll Down</span>
+        </div>
+    </section>
 
-    <!-- Toast -->
-    <div class="admin-toast" id="adminToast">
-        <i class="fas fa-check-circle"></i>
-        <span id="adminToastMessage">Action completed successfully!</span>
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">What We Offer</span>
+                <h2 class="section-title">Our <span class="highlight">Services</span></h2>
+                <p class="section-description">
+                    We provide comprehensive printing solutions tailored to your needs
+                </p>
+            </div>
+            <div class="services-grid" id="servicesGrid">
+                <!-- Services rendered by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Our Products</span>
+                <h2 class="section-title">Featured <span class="highlight">Products</span></h2>
+                <p class="section-description">
+                    Browse our range of high-quality printed products
+                </p>
+            </div>
+            <div class="product-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="apparel">Apparel</button>
+                <button class="filter-btn" data-filter="signage">Signage</button>
+                <button class="filter-btn" data-filter="prints">Prints</button>
+            </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products rendered by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="video-overlay"></div>
+        <div class="container">
+            <div class="video-content">
+                <span class="video-subtitle">See Our Work</span>
+                <h2>Watch How We Create <span class="highlight">Magic</span></h2>
+                <p>From design to print, experience our quality craftsmanship</p>
+                <button class="play-btn" id="playBtn">
+                    <i class="fas fa-play"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Video Modal -->
+        <div class="video-modal" id="videoModal">
+            <div class="modal-content">
+                <button class="close-modal" id="closeModal">&times;</button>
+                <div class="video-container">
+                    <video controls id="promoVideo">
+                        <source src="https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Our Work</span>
+                <h2 class="section-title">Project <span class="highlight">Gallery</span></h2>
+                <p class="section-description">
+                    Take a look at some of our recent printing projects
+                </p>
+            </div>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery rendered by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=600" alt="About Us">
+                        <div class="experience-badge">
+                            <span class="years" id="aboutYears">10+</span>
+                            <span class="text">Years of Excellence</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <span class="section-subtitle">About Us</span>
+                    <h2 class="section-title">Why Choose <span class="highlight">Pards Printing</span>?</h2>
+                    <p class="about-description">
+                        At Pards Printing Services, we combine cutting-edge sublimation technology with 
+                        years of expertise to deliver exceptional printing solutions. Our commitment to 
+                        quality and customer satisfaction has made us a trusted name in the industry.
+                    </p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Premium Quality</h4>
+                                <p>Using only the finest materials and inks for lasting prints</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Fast Turnaround</h4>
+                                <p>Quick delivery without compromising on quality</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-hand-holding-heart"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Customer Care</h4>
+                                <p>Dedicated support from inquiry to delivery</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-tags"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Competitive Pricing</h4>
+                                <p>Best value for professional printing services</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Testimonials</span>
+                <h2 class="section-title">What Our <span class="highlight">Clients</span> Say</h2>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Excellent quality jerseys for our basketball team! The colors are vibrant and the print hasn't faded even after multiple washes."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" alt="Client">
+                            <div>
+                                <h5>Juan Dela Cruz</h5>
+                                <span>Team Captain, Bulls Basketball</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"They fixed our office printer in no time! Professional service and very reasonable rates. Highly recommended!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" alt="Client">
+                            <div>
+                                <h5>Maria Santos</h5>
+                                <span>Office Manager, ABC Corp</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Our school's P.E. uniforms turned out amazing! Great quality and the bulk order was delivered on time."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100" alt="Client">
+                            <div>
+                                <h5>Pedro Reyes</h5>
+                                <span>Principal, XYZ High School</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-dots" id="testimonialDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <span class="section-subtitle">Get In Touch</span>
+                    <h2 class="section-title">Let's Start Your <span class="highlight">Project</span></h2>
+                    <p>Have a project in mind? Contact us today for a free quote!</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Address</h4>
+                                <p id="contactAddress">123 Print Street, Business District City, Province 1234</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p id="contactPhone">+63 912 345 6789</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p id="contactEmail">info@pardsprint.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4>Business Hours</h4>
+                                <p id="contactHours">Mon - Sat: 8:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm">
+                        <h3>Send Us a Message</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required placeholder="john@example.com">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+63 912 345 6789">
+                            </div>
+                            <div class="form-group">
+                                <label for="service">Service Needed</label>
+                                <select id="service" name="service" required>
+                                    <option value="">Select a service</option>
+                                    <option value="sublimation">Sublimation Printing</option>
+                                    <option value="uniforms">Uniform Printing</option>
+                                    <option value="signage">Signage & Tarpaulin</option>
+                                    <option value="documents">Document Printing</option>
+                                    <option value="repair">Printer Repair</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Tell us about your project..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <div class="footer-logo">
+                            <i class="fas fa-print"></i>
+                            <span>PARDS</span> Printing
+                        </div>
+                        <p id="footerDescription">Your trusted partner for premium printing solutions. Quality prints that make an impression.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#products">Products</a></li>
+                            <li><a href="#gallery">Gallery</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#">Sublimation Printing</a></li>
+                            <li><a href="#">Uniform Printing</a></li>
+                            <li><a href="#">Signage & Tarpaulin</a></li>
+                            <li><a href="#">Document Printing</a></li>
+                            <li><a href="#">Printer Repairs</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Newsletter</h4>
+                        <p>Subscribe to get updates on new products and special offers.</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Your email address">
+                            <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2024 Pards Printing Services. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="toastMessage">Message sent successfully!</span>
+        </div>
     </div>
 
     <script src="data.js"></script>
-    <script src="admin-script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
