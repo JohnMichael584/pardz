@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | Pards Printing Services</title>
     <link rel="stylesheet" href="admin-styles.css">
-    <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap)" rel="stylesheet">
-    <link rel="stylesheet" href="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Login Screen -->
@@ -87,35 +87,16 @@
                             <span>Products</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-page="customers">
-                        <a href="#">
-                            <i class="fas fa-users"></i>
-                            <span>Customers</span>
-                        </a>
-                    </li>
                     <li class="nav-item" data-page="services">
                         <a href="#">
                             <i class="fas fa-cogs"></i>
                             <span>Services</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-page="repairs">
+                    <li class="nav-item" data-page="gallery">
                         <a href="#">
-                            <i class="fas fa-tools"></i>
-                            <span>Repairs</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" data-page="reports">
-                        <a href="#">
-                            <i class="fas fa-chart-bar"></i>
-                            <span>Reports</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" data-page="messages">
-                        <a href="#">
-                            <i class="fas fa-envelope"></i>
-                            <span>Messages</span>
-                            <span class="badge">5</span>
+                            <i class="fas fa-images"></i>
+                            <span>Gallery</span>
                         </a>
                     </li>
                     <li class="nav-item" data-page="settings">
@@ -127,7 +108,7 @@
                 </ul>
             </nav>
             <div class="sidebar-footer">
-                <a href="index.html" class="view-site">
+                <a href="index.html" class="view-site" target="_blank">
                     <i class="fas fa-external-link-alt"></i>
                     <span>View Website</span>
                 </a>
@@ -194,7 +175,7 @@
                     </div>
                     <div class="user-menu">
                         <button class="user-btn">
-                            <img src="[images.unsplash.com](https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100)" alt="Admin">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100" alt="Admin">
                             <span>Admin</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
@@ -220,6 +201,33 @@
                     <!-- Stats Cards -->
                     <div class="stats-grid">
                         <div class="stat-card">
+                            <div class="stat-icon products">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalProducts">0</h3>
+                                <p>Total Products</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon services">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalServices">0</h3>
+                                <p>Total Services</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon gallery">
+                                <i class="fas fa-images"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalGallery">0</h3>
+                                <p>Gallery Items</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
                             <div class="stat-icon orders">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
@@ -227,363 +235,31 @@
                                 <h3>156</h3>
                                 <p>Total Orders</p>
                             </div>
-                            <div class="stat-trend up">
-                                <i class="fas fa-arrow-up"></i>
-                                <span>12%</span>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon revenue">
-                                <i class="fas fa-peso-sign"></i>
-                            </div>
-                            <div class="stat-info">
-                                <h3>₱285,450</h3>
-                                <p>Total Revenue</p>
-                            </div>
-                            <div class="stat-trend up">
-                                <i class="fas fa-arrow-up"></i>
-                                <span>8%</span>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon customers">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="stat-info">
-                                <h3>532</h3>
-                                <p>Total Customers</p>
-                            </div>
-                            <div class="stat-trend up">
-                                <i class="fas fa-arrow-up"></i>
-                                <span>5%</span>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon repairs">
-                                <i class="fas fa-tools"></i>
-                            </div>
-                            <div class="stat-info">
-                                <h3>28</h3>
-                                <p>Pending Repairs</p>
-                            </div>
-                            <div class="stat-trend down">
-                                <i class="fas fa-arrow-down"></i>
-                                <span>3%</span>
-                            </div>
                         </div>
                     </div>
 
-                    <!-- Charts Section -->
-                    <div class="charts-grid">
-                        <div class="chart-card">
-                            <div class="chart-header">
-                                <h3>Sales Overview</h3>
-                                <select class="chart-filter">
-                                    <option>This Week</option>
-                                    <option>This Month</option>
-                                    <option>This Year</option>
-                                </select>
-                            </div>
-                            <div class="chart-body">
-                                <canvas id="salesChart"></canvas>
-                            </div>
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <div class="section-header">
+                            <h3>Quick Actions</h3>
                         </div>
-                        <div class="chart-card">
-                            <div class="chart-header">
-                                <h3>Orders by Service</h3>
-                            </div>
-                            <div class="chart-body">
-                                <canvas id="servicesChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Recent Orders & Messages -->
-                    <div class="dashboard-grid">
-                        <div class="dashboard-card">
-                            <div class="card-header">
-                                <h3>Recent Orders</h3>
-                                <a href="#" class="view-all">View All</a>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="data-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Order ID</th>
-                                            <th>Customer</th>
-                                            <th>Service</th>
-                                            <th>Amount</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>#ORD-1234</td>
-                                            <td>Juan Dela Cruz</td>
-                                            <td>Jersey Printing</td>
-                                            <td>₱4,500</td>
-                                            <td><span class="status pending">Pending</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>#ORD-1233</td>
-                                            <td>Maria Santos</td>
-                                            <td>Tarpaulin</td>
-                                            <td>₱1,200</td>
-                                            <td><span class="status processing">Processing</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>#ORD-1232</td>
-                                            <td>Pedro Reyes</td>
-                                            <td>Polo Shirts</td>
-                                            <td>₱7,000</td>
-                                            <td><span class="status completed">Completed</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>#ORD-1231</td>
-                                            <td>Ana Garcia</td>
-                                            <td>Stickers</td>
-                                            <td>₱500</td>
-                                            <td><span class="status completed">Completed</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>#ORD-1230</td>
-                                            <td>Jose Cruz</td>
-                                            <td>P.E. Uniforms</td>
-                                            <td>₱15,000</td>
-                                            <td><span class="status processing">Processing</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="dashboard-card">
-                            <div class="card-header">
-                                <h3>Recent Messages</h3>
-                                <a href="#" class="view-all">View All</a>
-                            </div>
-                            <div class="message-list">
-                                <div class="message-item">
-                                    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100)" alt="User">
-                                    <div class="message-content">
-                                        <div class="message-header">
-                                            <h4>Juan Dela Cruz</h4>
-                                            <span>10 min ago</span>
-                                        </div>
-                                        <p>Hi, I would like to inquire about bulk jersey printing...</p>
-                                    </div>
-                                </div>
-                                <div class="message-item">
-                                    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100)" alt="User">
-                                    <div class="message-content">
-                                        <div class="message-header">
-                                            <h4>Maria Santos</h4>
-                                            <span>30 min ago</span>
-                                        </div>
-                                        <p>When will my tarpaulin order be ready?</p>
-                                    </div>
-                                </div>
-                                <div class="message-item">
-                                    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100)" alt="User">
-                                    <div class="message-content">
-                                        <div class="message-header">
-                                            <h4>Pedro Reyes</h4>
-                                            <span>1 hour ago</span>
-                                        </div>
-                                        <p>Thank you for the excellent service! The uniforms look amazing.</p>
-                                    </div>
-                                </div>
-                                <div class="message-item">
-                                    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100)" alt="User">
-                                    <div class="message-content">
-                                        <div class="message-header">
-                                            <h4>Ana Garcia</h4>
-                                            <span>2 hours ago</span>
-                                        </div>
-                                        <p>Can I get a quote for 50 polo shirts?</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Orders Page -->
-                <div class="page" id="ordersPage">
-                    <div class="page-header">
-                        <div>
-                            <h1>Orders</h1>
-                            <p>Manage all customer orders</p>
-                        </div>
-                        <button class="btn-primary" id="addOrderBtn">
-                            <i class="fas fa-plus"></i>
-                            <span>New Order</span>
-                        </button>
-                    </div>
-
-                    <div class="filter-bar">
-                        <div class="filter-group">
-                            <select>
-                                <option>All Status</option>
-                                <option>Pending</option>
-                                <option>Processing</option>
-                                <option>Completed</option>
-                                <option>Cancelled</option>
-                            </select>
-                            <select>
-                                <option>All Services</option>
-                                <option>Sublimation</option>
-                                <option>Signage</option>
-                                <option>Printing</option>
-                            </select>
-                            <input type="date" placeholder="Date">
-                        </div>
-                        <div class="search-filter">
-                            <i class="fas fa-search"></i>
-                            <input type="text" placeholder="Search orders...">
-                        </div>
-                    </div>
-
-                    <div class="dashboard-card">
-                        <div class="table-responsive">
-                            <table class="data-table full-table">
-                                <thead>
-                                    <tr>
-                                        <th><input type="checkbox" id="selectAll"></th>
-                                        <th>Order ID</th>
-                                        <th>Customer</th>
-                                        <th>Service</th>
-                                        <th>Items</th>
-                                        <th>Amount</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>#ORD-1234</td>
-                                        <td>
-                                            <div class="customer-info">
-                                                <img src="[images.unsplash.com](https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50)" alt="">
-                                                <span>Juan Dela Cruz</span>
-                                            </div>
-                                        </td>
-                                        <td>Jersey Printing</td>
-                                        <td>10 pcs</td>
-                                        <td>₱4,500</td>
-                                        <td>Jun 15, 2024</td>
-                                        <td><span class="status pending">Pending</span></td>
-                                        <td>
-                                            <div class="action-btns">
-                                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>#ORD-1233</td>
-                                        <td>
-                                            <div class="customer-info">
-                                                <img src="[images.unsplash.com](https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=50)" alt="">
-                                                <span>Maria Santos</span>
-                                            </div>
-                                        </td>
-                                        <td>Tarpaulin</td>
-                                        <td>2 pcs</td>
-                                        <td>₱1,200</td>
-                                        <td>Jun 15, 2024</td>
-                                        <td><span class="status processing">Processing</span></td>
-                                        <td>
-                                            <div class="action-btns">
-                                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>#ORD-1232</td>
-                                        <td>
-                                            <div class="customer-info">
-                                                <img src="[images.unsplash.com](https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50)" alt="">
-                                                <span>Pedro Reyes</span>
-                                            </div>
-                                        </td>
-                                        <td>Polo Shirts</td>
-                                        <td>20 pcs</td>
-                                        <td>₱7,000</td>
-                                        <td>Jun 14, 2024</td>
-                                        <td><span class="status completed">Completed</span></td>
-                                        <td>
-                                            <div class="action-btns">
-                                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>#ORD-1231</td>
-                                        <td>
-                                            <div class="customer-info">
-                                                <img src="[images.unsplash.com](https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50)" alt="">
-                                                <span>Ana Garcia</span>
-                                            </div>
-                                        </td>
-                                        <td>Stickers</td>
-                                        <td>100 pcs</td>
-                                        <td>₱500</td>
-                                        <td>Jun 14, 2024</td>
-                                        <td><span class="status completed">Completed</span></td>
-                                        <td>
-                                            <div class="action-btns">
-                                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>#ORD-1230</td>
-                                        <td>
-                                            <div class="customer-info">
-                                                <img src="[images.unsplash.com](https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=50)" alt="">
-                                                <span>Jose Cruz</span>
-                                            </div>
-                                        </td>
-                                        <td>P.E. Uniforms</td>
-                                        <td>50 sets</td>
-                                        <td>₱15,000</td>
-                                        <td>Jun 13, 2024</td>
-                                        <td><span class="status processing">Processing</span></td>
-                                        <td>
-                                            <div class="action-btns">
-                                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="table-footer">
-                            <p>Showing 1 to 5 of 156 entries</p>
-                            <div class="pagination">
-                                <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
-                                <button class="page-btn active">1</button>
-                                <button class="page-btn">2</button>
-                                <button class="page-btn">3</button>
-                                <button class="page-btn">...</button>
-                                <button class="page-btn">32</button>
-                                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
-                            </div>
+                        <div class="action-grid">
+                            <button class="action-card" id="addProductBtn">
+                                <i class="fas fa-plus-circle"></i>
+                                <span>Add Product</span>
+                            </button>
+                            <button class="action-card" id="addServiceBtn">
+                                <i class="fas fa-plus-circle"></i>
+                                <span>Add Service</span>
+                            </button>
+                            <button class="action-card" id="addGalleryBtn">
+                                <i class="fas fa-plus-circle"></i>
+                                <span>Add Gallery Item</span>
+                            </button>
+                            <button class="action-card" onclick="window.location.href='index.html'">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>View Website</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -595,208 +271,50 @@
                             <h1>Products</h1>
                             <p>Manage your product catalog</p>
                         </div>
-                        <button class="btn-primary" id="addProductBtn">
+                        <button class="btn-primary" id="addProductBtn2">
                             <i class="fas fa-plus"></i>
                             <span>Add Product</span>
                         </button>
                     </div>
 
-                    <div class="products-admin-grid">
-                        <div class="product-admin-card">
-                            <div class="product-admin-image">
-                                <img src="[images.unsplash.com](https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300)" alt="Polo Shirt">
-                                <div class="product-badge">Popular</div>
-                            </div>
-                            <div class="product-admin-info">
-                                <h4>Custom Polo Shirts</h4>
-                                <p class="product-category">Apparel</p>
-                                <div class="product-price-row">
-                                    <span class="price">₱350</span>
-                                    <span class="stock in-stock">In Stock</span>
-                                </div>
-                                <div class="product-actions">
-                                    <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
-                                    <button class="delete-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-admin-card">
-                            <div class="product-admin-image">
-                                <img src="[images.unsplash.com](https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=300)" alt="T-Shirt">
-                            </div>
-                            <div class="product-admin-info">
-                                <h4>Custom T-Shirts</h4>
-                                <p class="product-category">Apparel</p>
-                                <div class="product-price-row">
-                                    <span class="price">₱280</span>
-                                    <span class="stock in-stock">In Stock</span>
-                                </div>
-                                <div class="product-actions">
-                                    <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
-                                    <button class="delete-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-admin-card">
-                            <div class="product-admin-image">
-                                <img src="[images.unsplash.com](https://images.unsplash.com/photo-1580087256394-dc596e1c8f4f?w=300)" alt="Jersey">
-                            </div>
-                            <div class="product-admin-info">
-                                <h4>Sports Jersey</h4>
-                                <p class="product-category">Apparel</p>
-                                <div class="product-price-row">
-                                    <span class="price">₱450</span>
-                                    <span class="stock in-stock">In Stock</span>
-                                </div>
-                                <div class="product-actions">
-                                    <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
-                                    <button class="delete-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-admin-card">
-                            <div class="product-admin-image">
-                                <img src="[images.unsplash.com](https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300)" alt="Tarpaulin">
-                            </div>
-                            <div class="product-admin-info">
-                                <h4>Tarpaulin Banners</h4>
-                                <p class="product-category">Signage</p>
-                                <div class="product-price-row">
-                                    <span class="price">₱25/sqft</span>
-                                    <span class="stock in-stock">In Stock</span>
-                                </div>
-                                <div class="product-actions">
-                                    <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
-                                    <button class="delete-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-admin-card">
-                            <div class="product-admin-image">
-                                <img src="[images.unsplash.com](https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=300)" alt="Stickers">
-                            </div>
-                            <div class="product-admin-info">
-                                <h4>Custom Stickers</h4>
-                                <p class="product-category">Prints</p>
-                                <div class="product-price-row">
-                                    <span class="price">₱5/pc</span>
-                                    <span class="stock low-stock">Low Stock</span>
-                                </div>
-                                <div class="product-actions">
-                                    <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
-                                    <button class="delete-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-admin-card add-new">
-                            <div class="add-product-content">
-                                <i class="fas fa-plus-circle"></i>
-                                <p>Add New Product</p>
-                            </div>
-                        </div>
+                    <div class="products-admin-grid" id="productsGrid">
+                        <!-- Products will be rendered here -->
                     </div>
                 </div>
 
-                <!-- Messages Page -->
-                <div class="page" id="messagesPage">
+                <!-- Services Page -->
+                <div class="page" id="servicesPage">
                     <div class="page-header">
                         <div>
-                            <h1>Messages</h1>
-                            <p>Customer inquiries and messages</p>
+                            <h1>Services</h1>
+                            <p>Manage your services</p>
                         </div>
+                        <button class="btn-primary" id="addServiceBtn2">
+                            <i class="fas fa-plus"></i>
+                            <span>Add Service</span>
+                        </button>
                     </div>
 
-                    <div class="messages-container">
-                        <div class="messages-sidebar">
-                            <div class="messages-search">
-                                <i class="fas fa-search"></i>
-                                <input type="text" placeholder="Search messages...">
-                            </div>
-                            <div class="messages-list">
-                                <div class="message-preview active">
-                                    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50)" alt="">
-                                    <div class="preview-content">
-                                        <div class="preview-header">
-                                            <h4>Juan Dela Cruz</h4>
-                                            <span>10 min</span>
-                                        </div>
-                                        <p>Hi, I would like to inquire about...</p>
-                                    </div>
-                                    <span class="unread-badge">2</span>
-                                </div>
-                                <div class="message-preview">
-                                    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=50)" alt="">
-                                    <div class="preview-content">
-                                        <div class="preview-header">
-                                            <h4>Maria Santos</h4>
-                                            <span>30 min</span>
-                                        </div>
-                                        <p>When will my tarpaulin order...</p>
-                                    </div>
-                                </div>
-                                <div class="message-preview">
-                                    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50)" alt="">
-                                    <div class="preview-content">
-                                        <div class="preview-header">
-                                            <h4>Pedro Reyes</h4>
-                                            <span>1 hr</span>
-                                        </div>
-                                        <p>Thank you for the excellent...</p>
-                                    </div>
-                                </div>
-                                <div class="message-preview">
-                                    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50)" alt="">
-                                    <div class="preview-content">
-                                        <div class="preview-header">
-                                            <h4>Ana Garcia</h4>
-                                            <span>2 hr</span>
-                                        </div>
-                                        <p>Can I get a quote for 50 polo...</p>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="services-admin-grid" id="servicesGrid">
+                        <!-- Services will be rendered here -->
+                    </div>
+                </div>
+
+                <!-- Gallery Page -->
+                <div class="page" id="galleryPage">
+                    <div class="page-header">
+                        <div>
+                            <h1>Gallery</h1>
+                            <p>Manage your gallery images</p>
                         </div>
-                        <div class="messages-main">
-                            <div class="message-header">
-                                <div class="message-user">
-                                    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50)" alt="">
-                                    <div>
-                                        <h4>Juan Dela Cruz</h4>
-                                        <span>juandelacruz@email.com</span>
-                                    </div>
-                                </div>
-                                <div class="message-actions">
-                                    <button><i class="fas fa-phone"></i></button>
-                                    <button><i class="fas fa-video"></i></button>
-                                    <button><i class="fas fa-ellipsis-v"></i></button>
-                                </div>
-                            </div>
-                            <div class="message-body">
-                                <div class="message-date">Today</div>
-                                <div class="message received">
-                                    <p>Hi, I would like to inquire about bulk jersey printing for our basketball team. We need about 15 jerseys with custom designs.</p>
-                                    <span class="time">10:30 AM</span>
-                                </div>
-                                <div class="message received">
-                                    <p>Can you provide a quote and estimated delivery time?</p>
-                                    <span class="time">10:31 AM</span>
-                                </div>
-                                <div class="message sent">
-                                    <p>Hello Juan! Thank you for reaching out to Pards Printing Services. We'd be happy to help with your basketball jerseys.</p>
-                                    <span class="time">10:45 AM</span>
-                                </div>
-                                <div class="message sent">
-                                    <p>For 15 jerseys with full sublimation printing, our rate is ₱450 per jersey. This includes custom design, printing, and quality materials.</p>
-                                    <span class="time">10:46 AM</span>
-                                </div>
-                            </div>
-                            <div class="message-input">
-                                <button class="attach-btn"><i class="fas fa-paperclip"></i></button>
-                                <input type="text" placeholder="Type your message...">
-                                <button class="emoji-btn"><i class="fas fa-smile"></i></button>
-                                <button class="send-btn"><i class="fas fa-paper-plane"></i></button>
-                            </div>
-                        </div>
+                        <button class="btn-primary" id="addGalleryBtn2">
+                            <i class="fas fa-plus"></i>
+                            <span>Add Image</span>
+                        </button>
+                    </div>
+
+                    <div class="gallery-admin-grid" id="galleryGrid">
+                        <!-- Gallery items will be rendered here -->
                     </div>
                 </div>
 
@@ -805,271 +323,157 @@
                     <div class="page-header">
                         <div>
                             <h1>Settings</h1>
-                            <p>Manage your account and preferences</p>
+                            <p>Manage your website settings</p>
                         </div>
                     </div>
 
                     <div class="settings-container">
                         <div class="settings-tabs">
-                            <button class="settings-tab active" data-tab="profile">
-                                <i class="fas fa-user"></i>
-                                <span>Profile</span>
+                            <button class="settings-tab active" data-tab="general">
+                                <i class="fas fa-cog"></i>
+                                <span>General</span>
                             </button>
-                            <button class="settings-tab" data-tab="business">
-                                <i class="fas fa-building"></i>
-                                <span>Business Info</span>
+                            <button class="settings-tab" data-tab="hero">
+                                <i class="fas fa-home"></i>
+                                <span>Hero Section</span>
                             </button>
-                            <button class="settings-tab" data-tab="notifications">
-                                <i class="fas fa-bell"></i>
-                                <span>Notifications</span>
+                            <button class="settings-tab" data-tab="stats">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Statistics</span>
                             </button>
-                            <button class="settings-tab" data-tab="security">
-                                <i class="fas fa-shield-alt"></i>
-                                <span>Security</span>
+                            <button class="settings-tab" data-tab="data">
+                                <i class="fas fa-database"></i>
+                                <span>Data Management</span>
                             </button>
                         </div>
                         <div class="settings-content">
-                            <div class="settings-panel active" id="profilePanel">
-                                <h3>Profile Settings</h3>
-                                <form class="settings-form">
-                                    <div class="avatar-upload">
-                                        <img src="[images.unsplash.com](https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150)" alt="Profile">
-                                        <button type="button" class="change-avatar">
-                                            <i class="fas fa-camera"></i>
-                                        </button>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label>First Name</label>
-                                            <input type="text" value="Admin">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Last Name</label>
-                                            <input type="text" value="User">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email Address</label>
-                                        <input type="email" value="admin@pardsprint.com">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Phone Number</label>
-                                        <input type="tel" value="+63 912 345 6789">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Role</label>
-                                        <input type="text" value="Administrator" disabled>
-                                    </div>
-                                    <button type="submit" class="btn-primary">Save Changes</button>
-                                </form>
-                            </div>
-                            <div class="settings-panel" id="businessPanel">
-                                <h3>Business Information</h3>
-                                <form class="settings-form">
+                            <!-- General Settings -->
+                            <div class="settings-panel active" id="generalPanel">
+                                <h3>General Settings</h3>
+                                <form class="settings-form" id="generalSettingsForm">
                                     <div class="form-group">
                                         <label>Business Name</label>
-                                        <input type="text" value="Pards Printing Services">
+                                        <input type="text" id="businessName" value="Pards Printing Services">
                                     </div>
                                     <div class="form-group">
-                                        <label>Business Address</label>
-                                        <textarea>123 Print Street, Business District, City, Province 1234</textarea>
+                                        <label>Address</label>
+                                        <textarea id="businessAddress" rows="2">123 Print Street, Business District City, Province 1234</textarea>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group">
-                                            <label>Business Phone</label>
-                                            <input type="tel" value="+63 (02) 1234-5678">
+                                            <label>Phone</label>
+                                            <input type="text" id="businessPhone" value="+63 912 345 6789">
                                         </div>
                                         <div class="form-group">
-                                            <label>Business Email</label>
-                                            <input type="email" value="info@pardsprint.com">
+                                            <label>Email</label>
+                                            <input type="email" id="businessEmail" value="info@pardsprint.com">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Business Hours</label>
-                                        <input type="text" value="Mon - Sat: 8:00 AM - 6:00 PM">
+                                        <input type="text" id="businessHours" value="Mon - Sat: 8:00 AM - 6:00 PM">
                                     </div>
-                                    <button type="submit" class="btn-primary">Save Changes</button>
+                                    <button type="submit" class="btn-primary">Save Settings</button>
                                 </form>
                             </div>
-                            <div class="settings-panel" id="notificationsPanel">
-                                <h3>Notification Preferences</h3>
-                                <div class="notification-settings">
-                                    <div class="notification-option">
-                                        <div class="option-info">
-                                            <h4>Email Notifications</h4>
-                                            <p>Receive email alerts for new orders</p>
-                                        </div>
-                                        <label class="toggle-switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider"></span>
-                                        </label>
-                                    </div>
-                                    <div class="notification-option">
-                                        <div class="option-info">
-                                            <h4>SMS Notifications</h4>
-                                            <p>Receive SMS alerts for urgent orders</p>
-                                        </div>
-                                        <label class="toggle-switch">
-                                            <input type="checkbox">
-                                            <span class="slider"></span>
-                                        </label>
-                                    </div>
-                                    <div class="notification-option">
-                                        <div class="option-info">
-                                            <h4>New Message Alerts</h4>
-                                            <p>Get notified when customers send messages</p>
-                                        </div>
-                                        <label class="toggle-switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider"></span>
-                                        </label>
-                                    </div>
-                                    <div class="notification-option">
-                                        <div class="option-info">
-                                            <h4>Order Status Updates</h4>
-                                            <p>Get notified when order status changes</p>
-                                        </div>
-                                        <label class="toggle-switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="settings-panel" id="securityPanel">
-                                <h3>Security Settings</h3>
-                                <form class="settings-form">
+
+                            <!-- Hero Settings -->
+                            <div class="settings-panel" id="heroPanel">
+                                <h3>Hero Section Settings</h3>
+                                <form class="settings-form" id="heroSettingsForm">
                                     <div class="form-group">
-                                        <label>Current Password</label>
-                                        <input type="password" placeholder="Enter current password">
+                                        <label>Hero Title</label>
+                                        <input type="text" id="heroTitle" value="PARDS PRINTING SERVICES">
                                     </div>
                                     <div class="form-group">
-                                        <label>New Password</label>
-                                        <input type="password" placeholder="Enter new password">
+                                        <label>Hero Subtitle</label>
+                                        <input type="text" id="heroSubtitle" value="Welcome to">
                                     </div>
                                     <div class="form-group">
-                                        <label>Confirm New Password</label>
-                                        <input type="password" placeholder="Confirm new password">
+                                        <label>Hero Description</label>
+                                        <textarea id="heroDescription" rows="3">Your one-stop solution for premium sublimation printing, professional signage, and expert printer repairs. Quality that speaks for itself.</textarea>
                                     </div>
-                                    <button type="submit" class="btn-primary">Update Password</button>
+                                    <div class="form-group">
+                                        <label>Hero Image URL</label>
+                                        <input type="url" id="heroImage" value="https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Video URL</label>
+                                        <input type="url" id="videoUrl" value="https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4">
+                                    </div>
+                                    <button type="submit" class="btn-primary">Save Hero Settings</button>
                                 </form>
-                                <hr>
-                                <div class="security-options">
-                                    <h4>Two-Factor Authentication</h4>
-                                    <p>Add an extra layer of security to your account</p>
-                                    <button class="btn-secondary">Enable 2FA</button>
+                            </div>
+
+                            <!-- Statistics -->
+                            <div class="settings-panel" id="statsPanel">
+                                <h3>Statistics</h3>
+                                <form class="settings-form" id="statsSettingsForm">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Happy Clients</label>
+                                            <input type="number" id="statClients" value="500">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Projects Done</label>
+                                            <input type="number" id="statProjects" value="1000">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Years Experience</label>
+                                        <input type="number" id="statExperience" value="10">
+                                    </div>
+                                    <button type="submit" class="btn-primary">Save Statistics</button>
+                                </form>
+                            </div>
+
+                            <!-- Data Management -->
+                            <div class="settings-panel" id="dataPanel">
+                                <h3>Data Management</h3>
+                                <div class="data-management">
+                                    <div class="data-actions">
+                                        <button class="btn-secondary" id="exportDataBtn">
+                                            <i class="fas fa-download"></i> Export Data
+                                        </button>
+                                        <button class="btn-secondary" id="importDataBtn">
+                                            <i class="fas fa-upload"></i> Import Data
+                                        </button>
+                                        <button class="btn-danger" id="resetDataBtn">
+                                            <i class="fas fa-trash"></i> Reset to Default
+                                        </button>
+                                    </div>
+                                    <div class="data-status">
+                                        <p>Data is stored locally in your browser. <span id="dataSize"></span></p>
+                                    </div>
+                                    <input type="file" id="importFile" accept=".json" style="display:none">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Placeholder Pages -->
-                <div class="page" id="customersPage">
-                    <div class="page-header">
-                        <h1>Customers</h1>
-                        <p>Manage your customer database</p>
-                    </div>
-                    <div class="placeholder-content">
-                        <i class="fas fa-users"></i>
-                        <h3>Customer Management</h3>
-                        <p>Customer list and management features coming soon.</p>
-                    </div>
-                </div>
-
-                <div class="page" id="servicesPage">
-                    <div class="page-header">
-                        <h1>Services</h1>
-                        <p>Manage your service offerings</p>
-                    </div>
-                    <div class="placeholder-content">
-                        <i class="fas fa-cogs"></i>
-                        <h3>Service Management</h3>
-                        <p>Service configuration features coming soon.</p>
-                    </div>
-                </div>
-
-                <div class="page" id="repairsPage">
-                    <div class="page-header">
-                        <h1>Printer Repairs</h1>
-                        <p>Manage repair jobs and service requests</p>
-                    </div>
-                    <div class="placeholder-content">
-                        <i class="fas fa-tools"></i>
-                        <h3>Repair Management</h3>
-                        <p>Repair tracking features coming soon.</p>
-                    </div>
-                </div>
-
-                <div class="page" id="reportsPage">
-                    <div class="page-header">
-                        <h1>Reports</h1>
-                        <p>View analytics and generate reports</p>
-                    </div>
-                    <div class="placeholder-content">
-                        <i class="fas fa-chart-bar"></i>
-                        <h3>Reports & Analytics</h3>
-                        <p>Detailed reporting features coming soon.</p>
                     </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Modal Template -->
-    <div class="modal" id="orderModal">
+    <!-- Modal for Add/Edit -->
+    <div class="modal" id="itemModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Add New Order</h3>
-                <button class="close-btn">&times;</button>
+                <h3 id="modalTitle">Add Item</h3>
+                <button class="close-btn" id="modalClose">&times;</button>
             </div>
             <div class="modal-body">
-                <form id="orderForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Customer Name</label>
-                            <input type="text" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Contact Number</label>
-                            <input type="tel" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Service Type</label>
-                        <select required>
-                            <option value="">Select service</option>
-                            <option>Sublimation - Polo Shirt</option>
-                            <option>Sublimation - T-Shirt</option>
-                            <option>Sublimation - Jersey</option>
-                            <option>Sublimation - Long Sleeve</option>
-                            <option>P.E. Uniform</option>
-                            <option>Tarpaulin</option>
-                            <option>Signage</option>
-                            <option>Bond Paper Printing</option>
-                            <option>Stickers</option>
-                            <option>Printer Repair</option>
-                        </select>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Quantity</label>
-                            <input type="number" min="1" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Price per Item</label>
-                            <input type="number" step="0.01" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Special Instructions</label>
-                        <textarea rows="3"></textarea>
+                <form id="itemForm">
+                    <input type="hidden" id="itemId">
+                    <input type="hidden" id="itemType">
+                    <div id="modalFields">
+                        <!-- Dynamic fields will be rendered here -->
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn-secondary" id="cancelOrder">Cancel</button>
-                <button class="btn-primary" id="saveOrder">Save Order</button>
+                <button class="btn-secondary" id="modalCancel">Cancel</button>
+                <button class="btn-primary" id="modalSave">Save</button>
             </div>
         </div>
     </div>
@@ -1080,7 +484,7 @@
         <span id="adminToastMessage">Action completed successfully!</span>
     </div>
 
-    <script src="[cdn.jsdelivr.net](https://cdn.jsdelivr.net/npm/chart.js)"></script>
+    <script src="data.js"></script>
     <script src="admin-script.js"></script>
 </body>
 </html>
