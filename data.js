@@ -212,7 +212,12 @@ const AppData = {
     },
 
     getData() {
-        return JSON.parse(localStorage.getItem('pardsData'));
+        try {
+            return JSON.parse(localStorage.getItem('pardsData'));
+        } catch (e) {
+            console.error('Error parsing data:', e);
+            return this.init();
+        }
     },
 
     saveData(data) {
@@ -385,13 +390,20 @@ const AppData = {
     },
 
     getImageSrc(item) {
-        if (item.imageData) {
+        // Prioritize uploaded image data
+        if (item.imageData && typeof item.imageData === 'string' && item.imageData.startsWith('data:image')) {
             return item.imageData;
         }
-        return item.image || 'https://via.placeholder.com/400';
+        // Fallback to URL if available
+        if (item.image && typeof item.image === 'string' && item.image.startsWith('http')) {
+            return item.image;
+        }
+        // Default placeholder
+        return 'https://via.placeholder.com/400/2563eb/FFFFFF?text=No+Image';
     }
 };
 
+// Initialize data on load
 AppData.init();
 
 if (typeof module !== 'undefined' && module.exports) {
