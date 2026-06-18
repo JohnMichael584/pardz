@@ -2,19 +2,13 @@
    PARDS PRINTING SERVICES - MAIN STYLESHEET
    ========================================== */
 
-/* CSS Variables */
 :root {
-    /* Primary Colors */
     --primary: #2563eb;
     --primary-dark: #1d4ed8;
     --primary-light: #3b82f6;
-    
-    /* Secondary Colors */
     --secondary: #f97316;
     --secondary-dark: #ea580c;
     --secondary-light: #fb923c;
-    
-    /* Neutrals */
     --dark: #0f172a;
     --dark-light: #1e293b;
     --gray-900: #111827;
@@ -27,38 +21,25 @@
     --gray-200: #e5e7eb;
     --gray-100: #f3f4f6;
     --white: #ffffff;
-    
-    /* Accents */
     --success: #10b981;
     --warning: #f59e0b;
     --error: #ef4444;
-    
-    /* Typography */
     --font-primary: 'Poppins', sans-serif;
-    
-    /* Spacing */
     --section-padding: 100px 0;
     --container-padding: 0 20px;
-    
-    /* Border Radius */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 20px;
     --radius-xl: 30px;
-    
-    /* Shadows */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
     --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.15);
     --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.2);
-    
-    /* Transitions */
     --transition-fast: 0.2s ease;
     --transition-base: 0.3s ease;
     --transition-slow: 0.5s ease;
 }
 
-/* Reset & Base Styles */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -405,7 +386,6 @@ button {
     margin-bottom: 50px;
 }
 
-/* Buttons */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -444,7 +424,6 @@ button {
     justify-content: center;
 }
 
-/* Hero Stats */
 .hero-stats {
     display: flex;
     gap: 50px;
@@ -467,7 +446,6 @@ button {
     margin-top: 5px;
 }
 
-/* Hero Visual */
 .hero-visual {
     position: relative;
 }
@@ -538,7 +516,6 @@ button {
     }
 }
 
-/* Scroll Indicator */
 .scroll-indicator {
     position: absolute;
     bottom: 40px;
@@ -583,7 +560,6 @@ button {
     }
 }
 
-/* Animation Classes */
 .animate-fade-in {
     animation: fadeIn 0.8s ease forwards;
 }
@@ -935,7 +911,7 @@ button {
 .video-section {
     position: relative;
     height: 500px;
-    background: url('[images.unsplash.com](https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920)') center/cover no-repeat;
+    background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1019,7 +995,6 @@ button {
     }
 }
 
-/* Video Modal */
 .video-modal {
     position: fixed;
     top: 0;
@@ -1440,7 +1415,6 @@ button {
     transform: translateY(-3px);
 }
 
-/* Contact Form */
 .contact-form-wrapper {
     background: var(--white);
     border-radius: var(--radius-lg);
@@ -1502,7 +1476,7 @@ button {
 
 .form-group select {
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='[w3.org](http://www.w3.org/2000/svg)' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 20px center;
 }
@@ -1695,7 +1669,7 @@ button {
 }
 
 /* ==========================================
-   TOAST NOTIFICATION
+   TOAST
    ========================================== */
 .toast {
     position: fixed;
@@ -1736,21 +1710,18 @@ button {
 }
 
 /* ==========================================
-   RESPONSIVE STYLES
+   RESPONSIVE
    ========================================== */
 @media (max-width: 1200px) {
     .hero-title {
         font-size: 48px;
     }
-    
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
     .products-grid {
         grid-template-columns: repeat(3, 1fr);
     }
-    
     .footer-grid {
         grid-template-columns: 1fr 1fr;
         gap: 40px;
@@ -1770,121 +1741,95 @@ button {
         gap: 25px;
         transition: var(--transition-base);
     }
-    
     .nav-menu.active {
         right: 0;
     }
-    
     .nav-menu .nav-link {
         color: var(--white);
         font-size: 18px;
     }
-    
     .nav-toggle {
         display: flex;
     }
-    
     .nav-toggle.active span:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
     }
-    
     .nav-toggle.active span:nth-child(2) {
         opacity: 0;
     }
-    
     .nav-toggle.active span:nth-child(3) {
         transform: rotate(-45deg) translate(5px, -5px);
     }
-    
     .hero-content {
         grid-template-columns: 1fr;
         text-align: center;
         padding-top: 120px;
     }
-    
     .hero-title {
         font-size: 42px;
     }
-    
     .hero-description {
         margin: 0 auto 35px;
     }
-    
     .hero-buttons {
         justify-content: center;
     }
-    
     .hero-stats {
         justify-content: center;
     }
-    
     .hero-visual {
         order: -1;
         max-width: 500px;
         margin: 0 auto;
     }
-    
     .floating-card {
         display: none;
     }
-    
     .scroll-indicator {
         display: none;
     }
-    
     .about-content {
         grid-template-columns: 1fr;
         gap: 50px;
     }
-    
     .about-image {
         order: -1;
         max-width: 500px;
         margin: 0 auto;
     }
-    
     .about-text .section-subtitle,
     .about-text .section-title {
         text-align: center;
     }
-    
     .about-description {
         text-align: center;
     }
-    
     .contact-wrapper {
         grid-template-columns: 1fr;
         gap: 50px;
     }
-    
     .contact-info .section-subtitle,
     .contact-info .section-title {
         text-align: center;
     }
-    
     .contact-info > p {
         text-align: center;
     }
-    
     .contact-details {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 20px;
     }
-    
     .social-links {
         justify-content: center;
     }
-    
     .products-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: auto;
     }
-    
     .gallery-item.large,
     .gallery-item.tall {
         grid-column: span 1;
@@ -1896,73 +1841,57 @@ button {
     .section-title {
         font-size: 32px;
     }
-    
     .hero-title {
         font-size: 36px;
     }
-    
     .hero-stats {
         flex-direction: column;
         gap: 25px;
     }
-    
     .stat-number {
         font-size: 36px;
     }
-    
     .services-grid {
         grid-template-columns: 1fr;
     }
-    
     .about-features {
         grid-template-columns: 1fr;
     }
-    
     .contact-details {
         grid-template-columns: 1fr;
     }
-    
     .form-row {
         grid-template-columns: 1fr;
     }
-    
     .footer-grid {
         grid-template-columns: 1fr;
         text-align: center;
     }
-    
     .footer-logo {
         justify-content: center;
     }
-    
     .footer .social-links {
         justify-content: center;
     }
-    
     .footer-bottom .container {
         flex-direction: column;
         gap: 15px;
         text-align: center;
     }
-    
     .video-content h2 {
         font-size: 32px;
     }
-    
     .testimonial-card {
         padding: 30px 20px;
     }
-    
     .testimonial-card > p {
         font-size: 17px;
     }
-    
     .experience-badge {
         bottom: -20px;
         right: -10px;
         padding: 20px;
     }
-    
     .experience-badge .years {
         font-size: 36px;
     }
@@ -1972,28 +1901,22 @@ button {
     .hero-title {
         font-size: 30px;
     }
-    
     .hero-buttons {
         flex-direction: column;
     }
-    
     .btn {
         width: 100%;
         justify-content: center;
     }
-    
     .products-grid {
         grid-template-columns: 1fr;
     }
-    
     .gallery-grid {
         grid-template-columns: 1fr;
     }
-    
     .contact-form-wrapper {
         padding: 30px 20px;
     }
-    
     .play-btn {
         width: 80px;
         height: 80px;
